@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+body{font-family:sans-serif;text-align:center;margin-top:50px}
+input{padding:10px;margin:5px}
+button{padding:10px}
+</style>
+</head>
+<body>
+
+<h1>Calculator</h1>
+
+<input id="a" placeholder="A">
+<input id="b" placeholder="B">
+
+<br><br>
+
+<button onclick="calc('add')">+</button>
+<button onclick="calc('sub')">-</button>
+<button onclick="calc('mul')">*</button>
+<button onclick="calc('div')">/</button>
+
+<h2 id="res"></h2>
+
+<script>
+async function calc(op){
+  let a=document.getElementById('a').value;
+  let b=document.getElementById('b').value;
+
+  let res = await fetch(`/${op}?a=${a}&b=${b}`);
+  let data = await res.json();
+
+  document.getElementById('res').innerText = data.result;
+}
+</script>
+
+</body>
+</html>
